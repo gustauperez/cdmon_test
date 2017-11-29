@@ -14,13 +14,13 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
                     sudo docker-compose ${COMPOSE_FLAGS} exec -T apache /app/tests.py
-                        
+
                     error=$?
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                    if [[ $? != 0 ]]; then
+                    if [ $error -ne 0 ]; then
                         echo "Problem testing, killing the container and exiting"
                     fi
 
@@ -28,6 +28,14 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
                 '''
             }
+        }
+    }
+    post {
+        success {
+            sh 'Success!!!!!!!!!!!'
+        }
+        failure {
+            sh 'Failure to build!'
         }
     }
 }

@@ -1,0 +1,10 @@
+version: '2.0'
+
+services:
+   apache:
+      build:
+          context: .
+          dockerfile: Dockerfile
+      image: 'httpd:latest'
+      ports:
+         - "80:80"

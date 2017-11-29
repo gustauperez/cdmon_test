@@ -20,7 +20,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                    if [ $? != 0 ]; then
+                    if [ $? -ne 0 ]; then
                         echo "Problem testing, killing the container and exiting"
                     fi
 

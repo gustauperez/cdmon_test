@@ -14,7 +14,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
                     sudo docker-compose ${COMPOSE_FLAGS} exec -T apache /app/tests.py
-                        
+
                     error=$?
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
@@ -28,6 +28,14 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
                 '''
             }
+        }
+    }
+    post {
+        success {
+            sh 'Success!!!!!!!!!!!'
+        }
+        failure {
+            sh 'Failure to build!'
         }
     }
 }

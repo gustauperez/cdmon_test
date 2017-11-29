@@ -1,4 +1,3 @@
-# Simple Jenkinsfile to run a docker container which will be tested
 pipeline {
     agent any
     stages {

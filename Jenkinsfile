@@ -34,7 +34,6 @@ pipeline {
     post {
         success {
             sh 'Success!!!!!!!!!!!'
-            '''
         }
         failure {
             sh 'Failure to build!'

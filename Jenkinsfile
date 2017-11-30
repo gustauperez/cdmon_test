@@ -24,6 +24,8 @@ pipeline {
                     # Restart the container again. Here we'd deploy somewhere else.
                     sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
+
+                    sudo docker image prune -f
                 '''
             }
         }
@@ -31,9 +33,6 @@ pipeline {
     post {
         success {
             sh 'Success!!!!!!!!!!!'
-            sh ''' 
-                COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
-                sudo docker image prune -f
             '''
         }
         failure {

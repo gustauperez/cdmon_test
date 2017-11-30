@@ -31,7 +31,7 @@ pipeline {
     post {
         success {
             sh 'Success!!!!!!!!!!!'
-            sudo docker image prune -f
+            sh 'sudo docker image prune -f'
         }
         failure {
             sh 'Failure to build!'

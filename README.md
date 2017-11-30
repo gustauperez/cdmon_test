@@ -8,13 +8,27 @@ So you'd need a personal Digial Ocean key. Remember that you need to install doc
 
 ```
 # docker-machine create --driver digitalocean \ --digitalocean-access-token ${DIGITAL_OCEAN_TOKEN} ${DROPLET_NAME} [1]
-# eval $(docker-machine env droplet)
+# eval $(docker-machine env ${DROPLET_NAME})
 # cd ${GUS_GITHUB_REPO}/ex1
 # docker-compose build --up -d
 ```
 
-Please replace ${DIGITAL_OCEAN_TOKEN} with your personal token generated in Digital Ocean and ${DROPLET_NAME} with the name of your droplet.
+Please replace ${DIGITAL_OCEAN_TOKEN} with your personal token generated in Digital Ocean and ${DROPLET_NAME} with the name of your droplet. ${GUS_GITHUB_REPO} is the directory where you cloned the repo.
 
 This will connect to your droplet, build the latest image of the official docker container from Apache (which uses the latest version of 2.4, tagged as latest) and run it in the droplet.
 
 ## Exercise 2
+
+To test this one, the only thing needed is run the Jenkins docker container. Assuming that you ran [1], you only need to run:
+
+```
+# cd ${GUS_GITHUB_REPO}/ex2/jenkins && docker-compose build --up -d
+```
+
+Point your browser to your droplet IP (port 8080) and there you should have your Jenkins:
+
+    http://${DROPLET_IP}:8080
+
+If you want to test mine, use the IP provided by mail. The user is **cdmon** and the credentials are also provided by mail.     
+
+[1] eval $(docker-machine env ${DROPLET_NAME)}

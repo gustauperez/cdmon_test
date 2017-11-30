@@ -31,7 +31,10 @@ pipeline {
     post {
         success {
             sh 'Success!!!!!!!!!!!'
-            sh 'sudo docker image prune -f'
+            sh ''' 
+                COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
+                sudo docker image prune -f
+            '''
         }
         failure {
             sh 'Failure to build!'

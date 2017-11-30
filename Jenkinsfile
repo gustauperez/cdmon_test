@@ -13,9 +13,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
                     sudo docker-compose ${COMPOSE_FLAGS} exec -T apache /app/tests.py
-
                     error=$?
-
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 

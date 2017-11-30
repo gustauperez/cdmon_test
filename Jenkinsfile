@@ -19,6 +19,7 @@ pipeline {
 
                     if [[ $error != 0 ]]; then
                         echo "Problem testing, killing the container and exiting"
+                        exit -1
                     fi
 
                     # Restart the container again. Here we'd deploy somewhere else.

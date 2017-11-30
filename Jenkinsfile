@@ -33,6 +33,12 @@ pipeline {
         }
         failure {
             sh 'Failure to build!'
+            sh ''' 
+                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
+
+                    sudo docker-compose ${COMPOSE_FLAGS} stop
+                    sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
+            '''
         }
     }
 }

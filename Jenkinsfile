@@ -33,10 +33,10 @@ pipeline {
     }
     post {
         success {
-            sh 'Success!!!!!!!!!!!'
+            sh 'echo Success!!!!!!!!!!!'
         }
         failure {
-            sh 'Failure to build!'
+            sh 'echo Failure to build!'
             sh ''' 
                     COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                     # Stop the container, it had some problems

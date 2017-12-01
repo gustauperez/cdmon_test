@@ -22,13 +22,13 @@ pipeline {
 					
 					HASH=$(git rev-parse --short HEAD)
 
-					sudo docker tag apache gustaperez/apache:${HASH}
-					sudo docker tag apache gustaperez/apache:newest
+					sudo docker tag apache gustaperez/httpd:${HASH}
+					sudo docker tag apache gustaperez/httpd:newest
 
 					sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
 
-					sudo docker push gustaperez/apache:${HASH}
-					sudo docker push gustaperez/apache:newest
+					sudo docker push gustaperez/httpd:${HASH}
+					sudo docker push gustaperez/httpd:newest
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v

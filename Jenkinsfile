@@ -22,7 +22,7 @@ pipeline {
 
                     echo "!!!!!!!!!! error: ${error}"
 
-                    if [[ $error == 0 ]]; then
+                    if [ $error eq 0 ]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
                         HASH=$(git rev-parse --short HEAD)
 
@@ -38,7 +38,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                    if [[ $error != 0 ]]; then
+                    if [ $error -ne 0 ]; then
                         echo "Problem testing, killing the container and exiting"
                         exit -1
                     fi

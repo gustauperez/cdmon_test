@@ -18,11 +18,14 @@ pipeline {
 					# Before stopping the container, push it to the docker hub repo (or somewhere else). Here we'd push
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
-					# project)
+					# project) 
 
                     echo "!!!!!!!!!! error: ${error}"
 
                     if [ $error eq 0 ]; then
+                        
+                        echo "Error was 0"
+
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
                         HASH=$(git rev-parse --short HEAD)
 
@@ -35,6 +38,8 @@ pipeline {
 
                         sudo docker push gustaperez/httpd:${HASH}
                         sudo docker push gustaperez/httpd:newest
+                    else    
+                        echo "Error was 1"
                     fi    
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop

@@ -19,16 +19,19 @@ pipeline {
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project)
-					
-					HASH=$(git rev-parse --short HEAD)
 
-					sudo docker tag apache gustaperez/httpd:${HASH}
-					sudo docker tag apache gustaperez/httpd:newest
+                    if [[ $error == 0 ]]; then
+                        IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
+                        HASH=$(git rev-parse --short HEAD)
 
-					sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
+                        sudo docker tag ${IMAGE_ID} gustaperez/httpd:${HASH}
+                        sudo docker tag ${IMAGE_ID} gustaperez/httpd:newest
 
-					sudo docker push gustaperez/httpd:${HASH}
-					sudo docker push gustaperez/httpd:newest
+                        sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
+
+                        sudo docker push gustaperez/httpd:${HASH}
+                        sudo docker push gustaperez/httpd:newest
+                    fi    
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v

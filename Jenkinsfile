@@ -26,8 +26,8 @@ pipeline {
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
                         HASH=$(git rev-parse --short HEAD)
 
-                        sudo docker tag ${IMAGE_ID} gustaperez/httpd:${HASH}
-                        sudo docker tag ${IMAGE_ID} gustaperez/httpd:newest
+                        sudo docker tag httpd:latest gustaperez/httpd:${HASH}
+                        sudo docker tag httpd:latest gustaperez/httpd:newest
 
                         sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
 

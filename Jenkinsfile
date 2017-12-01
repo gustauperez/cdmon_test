@@ -33,11 +33,11 @@ pipeline {
 
                         sudo docker login -u gustauperez -p cdmon_test
 
-                        sudo docker tag httpd:latest gustaperez/httpd:${HASH}
-                        sudo docker tag httpd:latest gustaperez/httpd:newest
+                        sudo docker tag httpd:latest gustauperez/httpd:${HASH}
+                        sudo docker tag httpd:latest gustauperez/httpd:newest
 
-                        sudo docker push gustaperez/httpd:${HASH}
-                        sudo docker push gustaperez/httpd:newest
+                        sudo docker push gustauperez/httpd:${HASH}
+                        sudo docker push gustauperez/httpd:newest
                     else    
                         echo "Error was 1"
                     fi    

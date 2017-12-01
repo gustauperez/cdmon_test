@@ -22,7 +22,7 @@ pipeline {
 
                     echo "!!!!!!!!!! error: ${error}"
 
-                    if [ $error eq 0 ]; then
+                    if [ "$error" eq 0 ]; then
                         
                         echo "Error was 0"
 
@@ -45,7 +45,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                    if [ $error -ne 0 ]; then
+                    if [ "$error" -ne 0 ]; then
                         echo "Problem testing, killing the container and exiting"
                         exit -1
                     fi

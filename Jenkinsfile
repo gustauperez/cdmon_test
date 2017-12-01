@@ -33,8 +33,8 @@ pipeline {
                         sudo docker tag httpd:latest gustaperez/httpd:${HASH}
                         sudo docker tag httpd:latest gustaperez/httpd:newest
 
-                        sudo docker push gustaperez/cdmon_test:${HASH}
-                        sudo docker push gustaperez/cdmon_test:newest
+                        sudo docker push gustaperez/httpd:${HASH}
+                        sudo docker push gustaperez/httpd:newest
                     fi    
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop

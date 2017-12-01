@@ -29,8 +29,8 @@ pipeline {
 					
 					HASH=$(git rev-parse --short HEAD)
 
-					sudo docker tag -f apache gustaperez/apache:${HASH}
-					sudo docker tag -f apache gustaperez/apache:newest
+					sudo docker tag apache gustaperez/apache:${HASH}
+					sudo docker tag apache gustaperez/apache:newest
 
 					sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
 

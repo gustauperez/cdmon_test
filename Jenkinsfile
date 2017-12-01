@@ -29,8 +29,8 @@ pipeline {
 
                         sudo docker login -e gustauperez@gmail.com -u gustauperez -p cdmon_test
 
-                        sudo docker push gustaperez/httpd:${HASH}
-                        sudo docker push gustaperez/httpd:newest
+                        sudo docker push gustaperez/cdmon_test:${HASH}
+                        sudo docker push gustaperez/cdmon_test:newest
                     fi    
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop

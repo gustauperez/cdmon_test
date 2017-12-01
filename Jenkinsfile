@@ -38,6 +38,11 @@ pipeline {
 
                         sudo docker push gustauperez/httpd:${HASH}
                         sudo docker push gustauperez/httpd:newest
+
+                        # Remove the tags
+
+                        sudo docker rmi gustauperez/httpd:${HASH}
+                        sudo docker rmi gustauperez/httpd:newest
                     else    
                         echo "Error was 1"
                     fi    
@@ -54,7 +59,7 @@ pipeline {
                     sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
-                    sudo docker image prune -f
+                    sudo docker image prune -a -f
                 '''
             }
         }

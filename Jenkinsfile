@@ -33,11 +33,11 @@ pipeline {
 
                         sudo docker login -u gustauperez -p cdmon_test
 
-                        sudo docker tag httpd:latest gustauperez/httpd:${HASH}
-                        sudo docker tag httpd:latest gustauperez/httpd:newest
+                        sudo docker tag httpd:latest gustauperez/cdmon_test:${HASH}
+                        sudo docker tag httpd:latest gustauperez/cdmon_test:newest
 
-                        sudo docker push gustauperez/httpd:${HASH}
-                        sudo docker push gustauperez/httpd:newest
+                        sudo docker push gustauperez/cdmon_test:${HASH}
+                        sudo docker push gustauperez/cdmon_test:newest
 
                         # Remove the tags
 

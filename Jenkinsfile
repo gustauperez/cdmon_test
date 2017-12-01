@@ -20,6 +20,8 @@ pipeline {
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project)
 
+                    echo "!!!!!!!!!! error: ${error}"
+
                     if [[ $error == 0 ]]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
                         HASH=$(git rev-parse --short HEAD)

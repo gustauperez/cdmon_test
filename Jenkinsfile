@@ -50,7 +50,7 @@
                 '''
             }
         }
-        stage('Test') {
+        stage('Deploy') {
             steps {
                 sh '''
                     if [ "$error" = "0" ]; then

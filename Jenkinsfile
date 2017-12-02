@@ -35,37 +35,32 @@
             }
             steps {
                 sh '''
-                  #  if [ "${errorVar}" eq 0 ]; then
-                        IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
+                    IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 
-                        HASH=$(git rev-parse --short HEAD)
+                    HASH=$(git rev-parse --short HEAD)
 
-                        echo sudo docker login -u gustauperez -p cdmon_test
+                    echo sudo docker login -u gustauperez -p cdmon_test
 
-                        sudo docker login -u gustauperez -p cdmon_test
+                    sudo docker login -u gustauperez -p cdmon_test
 
-                        sudo docker tag httpd:latest gustauperez/cdmon_test:${HASH}
-                        sudo docker tag httpd:latest gustauperez/cdmon_test:newest
+                    sudo docker tag httpd:latest gustauperez/cdmon_test:${HASH}
+                    sudo docker tag httpd:latest gustauperez/cdmon_test:newest
 
-                        sudo docker push gustauperez/cdmon_test:${HASH}
-                        sudo docker push gustauperez/cdmon_test:newest
+                    sudo docker push gustauperez/cdmon_test:${HASH}
+                    sudo docker push gustauperez/cdmon_test:newest
 
-                        # Remove the tags
+                    # Remove the tags
 
-                        sudo docker rmi gustauperez/cdmon_test:${HASH}
-                        sudo docker rmi gustauperez/cdmon_test:newest
-                  #  fi
-
-                    echo flags: ${COMPOSE_FLAGS}
+                    sudo docker rmi gustauperez/cdmon_test:${HASH}
+                    sudo docker rmi gustauperez/cdmon_test:newest
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                 #   if [ "${errorVar}" eq 0 ]; then
-                        # Restart the container again. Here we'd deploy somewhere else.
-                        sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
-                        sudo docker-compose ${COMPOSE_FLAGS} up -d
-                 #   fi
+                    # Restart the container again. Here we'd deploy somewhere else.
+                    sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
+                    sudo docker-compose ${COMPOSE_FLAGS} up -d
+
                     sudo docker image prune -a -f
                 '''
             }
@@ -78,7 +73,6 @@
         failure {
             sh 'echo Failure to build!'
             sh ''' 
-                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                     # Stop the container, it had some problems
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v

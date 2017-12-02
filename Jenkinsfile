@@ -54,7 +54,7 @@ def errorVar=''
         stage('Deploy') {
             steps {
                 sh '''
-                    if [ "$error" = "0" ]; then
+                    if [ "$errorVar" = "0" ]; then
                         echo "Problem testing, killing the container and exiting"
                         exit -1
                     fi

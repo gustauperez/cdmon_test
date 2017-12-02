@@ -29,7 +29,15 @@ def errorVar=''
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project) 
-
+                '''
+            }
+        }
+        stage('Push') {
+            when {
+                fileExists('result.txt')
+            }
+            steps {
+                sh '''
                     if [ "${errorVar}" eq 0 ]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 

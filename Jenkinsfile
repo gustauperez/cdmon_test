@@ -26,11 +26,10 @@ def errorVar=''
             }
         }
         stage('Publish') {
-            when {
-                environment name: 'errorVar', value: '0'
-            }
             steps {
                 sh '''
+                    echo ${errorVar}
+
                     IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 
                     HASH=$(git rev-parse --short HEAD)

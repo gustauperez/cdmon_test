@@ -19,13 +19,7 @@ def errorVar=''
                     if [ "${errorVar}" -eq 0 ]; then
                         touch result.txt
                     fi
-                '''
-            }
-        }   
-        if(fileExists('result.txt')){
-        stage('Push'){
-            steps {
-                sh '''
+
 					# Before stopping the container, push it to the docker hub repo (or somewhere else). Here we'd push
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
@@ -65,7 +59,6 @@ def errorVar=''
                     sudo docker image prune -a -f
                 '''
             }
-        }
         }
     }
     post {

@@ -34,6 +34,7 @@
             }
             steps {
                 sh '''
+                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                   #  if [ "${errorVar}" eq 0 ]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 

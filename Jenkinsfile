@@ -2,6 +2,11 @@ def errorVar=''
  pipeline {
      agent any
      stages {
+        stage('Cleanup') {
+            steps {
+                git clean -ffdx
+            }
+        }
         stage('Test') {
             steps {
                 sh '''
@@ -55,7 +60,6 @@ def errorVar=''
                         sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                         sudo docker-compose ${COMPOSE_FLAGS} up -d
                     fi
-
                     sudo docker image prune -a -f
                 '''
             }

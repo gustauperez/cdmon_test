@@ -13,7 +13,7 @@
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
                     sudo docker-compose ${COMPOSE_FLAGS} exec -T apache /app/tests.py
-                    errorVar=$?
+                    def errorVar=$?
 
 					# Before stopping the container, push it to the docker hub repo (or somewhere else). Here we'd push
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
@@ -47,7 +47,12 @@
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
-
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
                     if [ "$error" = "0" ]; then
                         echo "Problem testing, killing the container and exiting"
                         exit -1

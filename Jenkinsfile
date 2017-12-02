@@ -26,8 +26,8 @@ def errorVar=''
                 '''
             }
         }
+        if (fileExists('result.txt')){
         stage('Publish') {
-            if (fileExists('result.txt')){
             steps {
                 sh '''
                     echo ${errorVar}
@@ -55,10 +55,10 @@ def errorVar=''
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
                 '''
             }    
-            }
         }
+        }
+        if (fileExists('result.txt')){
         stage('Deploy') {
-            if (fileExists('result.txt')){
             steps {
                 sh '''
                     COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
@@ -69,7 +69,7 @@ def errorVar=''
                     sudo docker image prune -a -f
                 '''
             }
-            }
+        }
         }
     }
     post {

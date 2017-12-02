@@ -26,7 +26,7 @@ def errorVar=''
         }
         stage('Publish') {
             when {
-                environment name: 'errorVar', value '0'
+                environment name: 'errorVar', value: '0'
             }
             steps {
                 sh '''
@@ -56,7 +56,7 @@ def errorVar=''
         }
         stage('Deploy') {
             when {
-                environment name: 'errorVar', value '0'
+                environment name: 'errorVar', value: '0'
             }
             steps {
                 sh '''

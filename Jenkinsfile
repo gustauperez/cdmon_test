@@ -20,12 +20,14 @@ def errorVar=''
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project) 
-                    echo "\${errorVar}: ${errorVar}"
-                    export errorVar
+                    if [ "${errorVar}" eq 0 ]; then
+                        touch result.txt
+                    fi
                 '''
             }
         }
         stage('Publish') {
+            if (fileExists('result.txt')){
             steps {
                 sh '''
                     echo ${errorVar}
@@ -52,12 +54,11 @@ def errorVar=''
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
                 '''
+            }    
             }
         }
         stage('Deploy') {
-            when {
-                environment name: 'errorVar', value: '0'
-            }
+            if (fileExists('result.txt')){
             steps {
                 sh '''
                     COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
@@ -67,6 +68,7 @@ def errorVar=''
 
                     sudo docker image prune -a -f
                 '''
+            }
             }
         }
     }

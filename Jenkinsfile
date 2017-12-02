@@ -1,11 +1,12 @@
  pipeline {
      agent any
+     environment {
+         COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
+     }
      stages {
         stage('Test') {
             steps {
                 sh '''
-                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
-
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
@@ -34,7 +35,6 @@
             }
             steps {
                 sh '''
-                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                   #  if [ "${errorVar}" eq 0 ]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 
@@ -62,7 +62,6 @@
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
                  #   if [ "${errorVar}" eq 0 ]; then
-                        COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                         # Restart the container again. Here we'd deploy somewhere else.
                         sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                         sudo docker-compose ${COMPOSE_FLAGS} up -d

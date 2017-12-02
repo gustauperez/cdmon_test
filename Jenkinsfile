@@ -1,11 +1,6 @@
  pipeline {
      agent any
      stages {
-        stage('Cleanup') {
-            steps {
-                git clean -ffdx
-            }
-        }
         stage('Test') {
             steps {
                 sh '''
@@ -39,7 +34,7 @@
             }
             steps {
                 sh '''
-                    if [ "${errorVar}" eq 0 ]; then
+                  #  if [ "${errorVar}" eq 0 ]; then
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
 
                         HASH=$(git rev-parse --short HEAD)
@@ -58,17 +53,17 @@
 
                         sudo docker rmi gustauperez/cdmon_test:${HASH}
                         sudo docker rmi gustauperez/cdmon_test:newest
-                    fi
+                  #  fi
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 
-                    if [ "${errorVar}" eq 0 ]; then
+                 #   if [ "${errorVar}" eq 0 ]; then
                         COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                         # Restart the container again. Here we'd deploy somewhere else.
                         sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                         sudo docker-compose ${COMPOSE_FLAGS} up -d
-                    fi
+                 #   fi
                     sudo docker image prune -a -f
                 '''
             }

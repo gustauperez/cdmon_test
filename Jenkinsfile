@@ -20,7 +20,7 @@ def errorVar=''
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project) 
-                    export ${errorVar}
+                    export errorVar
                 '''
             }
         }

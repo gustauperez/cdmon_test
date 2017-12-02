@@ -1,4 +1,5 @@
-FROM jenkins/jenkins:latest
+#FROM jenkins/jenkins:latest
+FROM myjenkins
 
 USER root
 RUN apt-get update -qq
@@ -9,7 +10,7 @@ RUN apt-get update -qq
 RUN apt-get install -y sudo
 RUN apt-get install -y docker-engine docker-compose
 RUN apt-get install -y vim
-RUN apt-get install -y mvn
+RUN apt-get install -y maven
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 COPY plugins.txt /usr/share/jenkins/plugins.txt

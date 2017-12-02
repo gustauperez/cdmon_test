@@ -54,6 +54,7 @@ def errorVar=''
         stage('Deploy') {
             steps {
                 sh '''
+                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
                     # Restart the container again. Here we'd deploy somewhere else.
                     sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                     sudo docker-compose ${COMPOSE_FLAGS} up -d

@@ -1,4 +1,3 @@
-def errorVar=''
  pipeline {
      agent any
      stages {
@@ -34,7 +33,9 @@ def errorVar=''
         }
         stage('Push') {
             when {
-                fileExists('result.txt')
+                expression {
+                    fileExists('result.txt')
+                }
             }
             steps {
                 sh '''

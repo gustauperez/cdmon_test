@@ -1,7 +1,8 @@
-pipeline {
-    agent any
-    stages {
+ pipeline {
+     agent any
+     stages {
         stage('Test') {
+            steps {
                 sh '''
                     def COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
 
@@ -57,6 +58,7 @@ pipeline {
 
                     sudo docker image prune -a -f
                 '''
+            }
         }
     }
     post {

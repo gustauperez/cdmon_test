@@ -1,5 +1,6 @@
 FROM jenkins/jenkins:latest
 
+
 USER root
 RUN apt-get update -qq
 RUN apt-get install -y apt-transport-https ca-certificates

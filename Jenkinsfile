@@ -24,6 +24,7 @@
                     if [ "${errorVar}" = "0" ]; then
                         
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
+
                         HASH=$(git rev-parse --short HEAD)
 
                         echo sudo docker login -u gustauperez -p cdmon_test
@@ -38,8 +39,8 @@
 
                         # Remove the tags
 
-                        sudo docker rmi gustauperez/httpd:${HASH}
-                        sudo docker rmi gustauperez/httpd:newest
+                        sudo docker rmi gustauperez/cdmon_test:${HASH}
+                        sudo docker rmi gustauperez/cdmon_test:newest
                     else    
                         echo "Error was 1"
                     fi    

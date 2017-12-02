@@ -56,6 +56,8 @@
                         sudo docker rmi gustauperez/cdmon_test:newest
                   #  fi
 
+                    echo flags: ${COMPOSE_FLAGS}
+
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
 

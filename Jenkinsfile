@@ -3,6 +3,9 @@
      environment {
          COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
      }
+     options {
+        timestamps()
+     }
      stages {
         stage('Test') {
             steps {

@@ -57,7 +57,6 @@ pipeline {
 
                     sudo docker image prune -a -f
                 '''
-            }
         }
     }
     post {

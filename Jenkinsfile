@@ -20,7 +20,6 @@ pipeline {
 					# project) 
 
                     echo "!!!!!!!!!! error: ${errorVar}"
-
                     if [ "${errorVar}" = "0" ]; then
                         
                         IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")

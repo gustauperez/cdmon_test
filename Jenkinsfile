@@ -20,56 +20,41 @@ def errorVar=''
 					# it to our private repo and deploy it using that repo. For the sake of simplicity
 					# I'll deploy using the same build process (pulling the base image from the Apache
 					# project) 
+
                     if [ "${errorVar}" eq 0 ]; then
-                        touch result.txt
+                        IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
+
+                        HASH=$(git rev-parse --short HEAD)
+
+                        echo sudo docker login -u gustauperez -p cdmon_test
+
+                        sudo docker login -u gustauperez -p cdmon_test
+
+                        sudo docker tag httpd:latest gustauperez/cdmon_test:${HASH}
+                        sudo docker tag httpd:latest gustauperez/cdmon_test:newest
+
+                        sudo docker push gustauperez/cdmon_test:${HASH}
+                        sudo docker push gustauperez/cdmon_test:newest
+
+                        # Remove the tags
+
+                        sudo docker rmi gustauperez/cdmon_test:${HASH}
+                        sudo docker rmi gustauperez/cdmon_test:newest
                     fi
-                '''
-            }
-        }
-        if (fileExists('result.txt')){
-        stage('Publish') {
-            steps {
-                sh '''
-                    echo ${errorVar}
-
-                    IMAGE_ID=$(docker ps | grep "httpd:latest" | sort -k 4 | cut -f 1  -d " ")
-
-                    HASH=$(git rev-parse --short HEAD)
-
-                    echo sudo docker login -u gustauperez -p cdmon_test
-
-                    sudo docker login -u gustauperez -p cdmon_test
-
-                    sudo docker tag httpd:latest gustauperez/cdmon_test:${HASH}
-                    sudo docker tag httpd:latest gustauperez/cdmon_test:newest
-
-                    sudo docker push gustauperez/cdmon_test:${HASH}
-                    sudo docker push gustauperez/cdmon_test:newest
-
-                    # Remove the tags
-
-                    sudo docker rmi gustauperez/cdmon_test:${HASH}
-                    sudo docker rmi gustauperez/cdmon_test:newest
 
                     sudo docker-compose ${COMPOSE_FLAGS} stop
                     sudo docker-compose ${COMPOSE_FLAGS} rm --force -v
-                '''
-            }    
-        }
-        }
-        if (fileExists('result.txt')){
-        stage('Deploy') {
-            steps {
-                sh '''
-                    COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
-                    # Restart the container again. Here we'd deploy somewhere else.
-                    sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
-                    sudo docker-compose ${COMPOSE_FLAGS} up -d
+
+                    if [ "${errorVar}" eq 0 ]; then
+                        COMPOSE_FLAGS="-f ${WORKSPACE}/ex2/apache/docker-compose.yml -p apache"
+                        # Restart the container again. Here we'd deploy somewhere else.
+                        sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
+                        sudo docker-compose ${COMPOSE_FLAGS} up -d
+                    fi
 
                     sudo docker image prune -a -f
                 '''
             }
-        }
         }
     }
     post {

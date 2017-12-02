@@ -1,3 +1,4 @@
+def errorVar=''
  pipeline {
      agent any
      stages {
@@ -13,7 +14,7 @@
                     sudo docker-compose ${COMPOSE_FLAGS} up -d
 
                     sudo docker-compose ${COMPOSE_FLAGS} exec -T apache /app/tests.py
-                    def errorVar=$?
+                    errorVar=$?
 
 					# Before stopping the container, push it to the docker hub repo (or somewhere else). Here we'd push
 					# it to our private repo and deploy it using that repo. For the sake of simplicity

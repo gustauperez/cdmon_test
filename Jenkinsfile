@@ -22,8 +22,8 @@ def errorVar=''
                 '''
             }
         }   
-        stage('Push'){
         if(fileExists('result.txt')){
+        stage('Push'){
             steps {
                 sh '''
 					# Before stopping the container, push it to the docker hub repo (or somewhere else). Here we'd push

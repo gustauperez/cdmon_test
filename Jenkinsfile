@@ -54,11 +54,6 @@ def errorVar=''
         stage('Deploy') {
             steps {
                 sh '''
-                    if [ "$errorVar" = "0" ]; then
-                        echo "Problem testing, killing the container and exiting"
-                        exit -1
-                    fi
-
                     # Restart the container again. Here we'd deploy somewhere else.
                     sudo docker-compose ${COMPOSE_FLAGS} build --no-cache
                     sudo docker-compose ${COMPOSE_FLAGS} up -d

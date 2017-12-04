@@ -12,7 +12,7 @@ For this one you'd need a personal Digital Ocean key. Remember that you need to 
 # cd ${GUS_GITHUB_REPO}/ex1
 # docker-compose build --up -d
 ```
-Please replace **${DIGITAL_OCEAN_TOKEN}** with your personal token generated in Digital Ocean and **${DROPLET_NAME}** with the name of your droplet. **${GUS_GITHUB_REPO}** is the directory where you cloned the repo.
+Please replace **${DIGITAL_OCEAN_TOKEN}** with your personal token generated in your Digital Ocean account and **${DROPLET_NAME}** with the name of your droplet. **${GUS_GITHUB_REPO}** is the directory where you cloned the repo.
 
 This will connect to your droplet, build the latest image of the official docker container from Apache (which uses the latest version of 2.4, tagged as latest) and run it in the droplet.
 

@@ -4,7 +4,7 @@ This repo contains the code for the CDmon test. It's been split in two different
 
 ## Exercise 1
 
-So you'd need a personal Digital Ocean key. Remember that you need to install docker in your machine (your mileage may vary, for Linux check your package manager, for Windows and MacOs, go to the official site and download them). After that, open a command line and run the following commands (I’m assuming a UNIX machine, for Windows probably you’d need to use back slashes instead):
+For this one you'd need a personal Digital Ocean key. Remember that you need to install docker in your machine (your mileage may vary, for Linux check your package manager, for Windows and MacOs, go to the official site and download them). After that, open a command line and run the following commands (I’m assuming a UNIX machine, for Windows probably you’d need to use back slashes instead):
 
 ```
 # docker-machine create --driver digitalocean \ --digitalocean-access-token ${DIGITAL_OCEAN_TOKEN} ${DROPLET_NAME} [1]

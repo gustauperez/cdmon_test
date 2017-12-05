@@ -31,3 +31,5 @@ http://${DROPLET_IP}:8080
 If you want to test mine, use the IP provided by mail. The user is **cdmon** and the credentials are also provided by mail.     
 
 [1] eval $(docker-machine env ${DROPLET_NAME)}
+
+afegit per CDmon
